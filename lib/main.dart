@@ -17,73 +17,41 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  MyHomePage({Key key, String title}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+  final _widgetOptions = [
+    new Home(),
+    new Discovery(),
+    new Me()
+  ];
+
   @override
   Widget build(BuildContext context) {
-
-    int indexSelect = 1;
-
-    var _pageList = [new Home(), new Discovery(), new Me()];
-
     return Scaffold(
-      appBar: new AppBar(
-        title: Text("呱呱"),
-      ),
-      body: _pageList[indexSelect],
+      body: _widgetOptions[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          new BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.black,
-              ),
-              title: Text("Home",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.blue, fontSize: 14.0))),
-          new BottomNavigationBarItem(
-              icon: Icon(
-                Icons.disc_full,
-                color: Colors.black,
-              ),
-              title: Text("Giao",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.blue, fontSize: 14.0))),
-          new BottomNavigationBarItem(
-              icon: Icon(
-                Icons.directions_subway,
-                color: Colors.black,
-              ),
-              title: Text("Discover",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.blue, fontSize: 14.0))),
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+          BottomNavigationBarItem(icon: Icon(Icons.business), title: Text('Business')),
+          BottomNavigationBarItem(icon: Icon(Icons.school), title: Text('School')),
         ],
         type: BottomNavigationBarType.fixed,
-        currentIndex: indexSelect,
+        currentIndex: _selectedIndex,
         fixedColor: Colors.deepPurple,
-        onTap: (index) {
-          setState(() {
-        
-            indexSelect = index;
-          });
-        },
+        onTap: _onItemTapped,
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }
