@@ -121,8 +121,8 @@ class meState extends State {
               showSnackBar("4");
               break;
             case 5:
-        Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => new Channel();
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => new Channel()));
               break;
             case 6:
               Navigator.push(context,
